@@ -1,0 +1,88 @@
+.fullCard {
+  width: 900px;
+  min-height: 140px;
+  padding: 15px;
+  margin: 26px auto 10px auto;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.15);
+
+  .miniCard {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 80px;
+  }
+  .article {
+    .titleInfo {
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+      margin-bottom: 10px;
+      .title {
+        font-size: 20px;
+        color: #1890ff;
+        margin-right: 15px;
+        cursor: pointer;
+        overflow-wrap: anywhere;
+      }
+      .like {
+        display: flex;
+        width: 16px;
+        height: 16px;
+        img {
+          padding-right: 5px;
+        }
+        img:hover {
+          opacity: 0.5;
+        }
+        // margin-right: 5px;
+        // background-image: url('../../../public/img/emptyHeart.svg');
+        // background-repeat: no-repeat;
+      }
+    }
+    .alltags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 10px;
+      .tag {
+        display: block;
+        padding: 3px;
+        border: 1px solid red;
+        border-radius: 2px;
+        overflow-wrap: anywhere;
+      }
+    }
+    .description {
+      color: #414141;
+      overflow-wrap: anywhere;
+    }
+  }
+  .author {
+    display: flex;
+    align-items: center;
+    .info {
+      min-width: 80px;
+      margin-right: 12px;
+      .name {
+        font-size: 18px;
+      }
+      .date {
+        font-size: 12px;
+        color: gray;
+      }
+    }
+    .avatar {
+      width: 46px;
+      height: 46px;
+    }
+  }
+  .text {
+    display: block;
+    padding: 15px;
+    // margin-top: 25px;
+    overflow-wrap: anywhere;
+    font-size: 20px;
+  }
+}

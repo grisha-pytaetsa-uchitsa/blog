@@ -1,0 +1,85 @@
+.SignInContainer {
+  display: flex;
+  flex-direction: column;
+  width: 384px;
+  height: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  margin: 60px auto;
+  padding: 48px 32px;
+  box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.15);
+  .title {
+    margin: 0 auto 21px auto;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
+    .inputLabel {
+      display: flex;
+      flex-direction: column;
+      // margin-bottom: 12px;
+      input {
+        width: 320px;
+        height: 40px;
+        margin-top: 3px;
+        padding: 8px 12px;
+        border: 1px solid #d9d9d9;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+      input:hover {
+        opacity: 0.5;
+      }
+      input:focus {
+        border-color: green;
+      }
+    }
+    .inputCheckbox {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: #595959;
+      line-height: 22px;
+      padding-top: 12px;
+      margin-top: 10px;
+      // margin-bottom: 15px;
+      border-top: 1px solid #d9d9d9;
+      cursor: pointer;
+      .checkbox {
+        width: 16px;
+        height: 16px;
+      }
+      .checkbox:hover {
+        opacity: 0.5;
+      }
+    }
+    .buttonCreate {
+      width: 320px;
+      height: 40px;
+      margin: 15px 0;
+      background-color: #1890ff;
+      color: #fff;
+      border-radius: 5px;
+    }
+    .buttonCreate:hover {
+      opacity: 0.5;
+    }
+  }
+  p {
+    margin: 0 auto;
+    font-size: 12px;
+    color: #8c8c8c;
+    button {
+      font-size: 12px;
+      color: #1890ff;
+    }
+  }
+  .warningText {
+    p {
+      color: red;
+    }
+    height: 22px;
+  }
+}
