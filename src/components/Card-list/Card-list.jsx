@@ -26,11 +26,11 @@ export default function CardList() {
   return (
     <ul className={styles.cardList}>
       {cards.map((el) => (
-        <Card key={`${el.slug}${el.title}`} {...el} />
+        <li key={`${el.slug}${el.title}`}>
+          <Card {...el} />
+        </li>
       ))}
-      <li>
-        <PaginationComponet className={styles.pagination} />
-      </li>
+      <PaginationComponet className={styles.pagination} />
     </ul>
   );
 }

@@ -1,24 +1,33 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-let initialState;
+const initialState = {
+  user: {},
+  isAuth: false,
+  userStatus: null,
+  userError: null,
+};
 
-if (sessionStorage.getItem('user')) {
-  const newUser = JSON.parse(sessionStorage.getItem('user'));
-  initialState = {
-    user: newUser,
-    isAuth: true,
-    userStatus: null,
-    userError: null,
+export const getUser = createAsyncThunk('card/getUser', async (token, { rejectWithValue }) => {
+  const url = 'https://blog.kata.academy/api/user';
+  const options = {
+    method: 'GET',
+    headers: {
+      Authorization: `Token ${token}`,
+    },
   };
-} else {
-  initialState = {
-    user: {},
-    isAuth: false,
-    userStatus: null,
-    userError: null,
-  };
-}
+
+  try {
+    const res = await fetch(url, options);
+    if (!res.ok) {
+      throw new Error('Warning! Error');
+    }
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    return rejectWithValue(err.message);
+  }
+});
 
 export const operationWithAcc = createAsyncThunk('card/createNewAcc', async (userInfo, { rejectWithValue }) => {
   const { username } = userInfo;
@@ -85,11 +94,35 @@ const userSlice = createSlice({
   reducers: {
     logOut(state) {
       state.user = {};
-      sessionStorage.clear();
+      localStorage.clear();
       state.isAuth = false;
     },
   },
   extraReducers: (builder) => {
+    builder
+      .addCase(getUser.pending, (state) => {
+        state.userStatus = 'loading';
+        state.userError = null;
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.userStatus = 'resolved';
+        state.isAuth = true;
+        const { username, email, token, image } = action.payload.user;
+        try {
+          state.user = {
+            email,
+            token,
+            username,
+            image,
+          };
+        } catch (err) {
+          console.log(err);
+        }
+      })
+      .addCase(getUser.rejected, (state, action) => {
+        state.userStatus = 'rejected';
+        state.userError = action.payload;
+      });
     builder
       .addCase(operationWithAcc.pending, (state) => {
         state.userStatus = 'loading';
@@ -106,7 +139,7 @@ const userSlice = createSlice({
             username,
             image,
           };
-          sessionStorage.setItem('user', JSON.stringify(action.payload.user));
+          localStorage.setItem('token', JSON.stringify(token));
         } catch (err) {
           console.log(err);
         }
@@ -130,7 +163,6 @@ const userSlice = createSlice({
             username,
             image,
           };
-          sessionStorage.setItem('user', JSON.stringify(action.payload.user));
         } catch (err) {
           console.log(err);
         }
